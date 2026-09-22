@@ -111,6 +111,10 @@
       line("医疗保险(个人)", r.medicalEmployee.rate, r.medicalEmployee.src) +
       line("失业保险(个人)", r.unemploymentEmployee.rate, r.unemploymentEmployee.src);
     var hf = line("住房公积金(个人)", hfRate, "《住房公积金管理条例》·5%-12%单位选定,个人同缴");
+    // Employer side is a single number, not itemised lines, because none of
+    // it reaches the take-home figure — breaking it out would add rows to
+    // the page about money the user never sees. `lines` below is therefore
+    // the employee side only, which is the side that is actually deducted.
     var employer = base * (r.pensionEmployer.rate + r.medicalEmployer.rate +
       r.unemploymentEmployer.rate + r.injuryEmployer.rate + r.maternityEmployer.rate) + base * hfRate;
     var baseNote = city.baseFloor > 0 || city.baseCeil !== Infinity
@@ -127,7 +131,7 @@
 
   // ---- tax on comprehensive income (annual, 汇算口径) ---------------------
   function taxFromBrackets(taxableIncome, brackets) {
-    if (taxableIncome <= 0) return { tax: 0, bracket: null };
+    if (taxableIncome <= 0) return { tax: 0, bracket: null, effectiveRate: 0 };
     for (var i = 0; i < brackets.length; i++) {
       if (taxableIncome <= brackets[i].upTo) {
         var b = brackets[i];
@@ -138,7 +142,9 @@
         };
       }
     }
-    return { tax: 0, bracket: null };
+    // Unreachable for a table whose top band runs to Infinity. Kept so every
+    // return from this function has the same three keys.
+    return { tax: 0, bracket: null, effectiveRate: 0 };
   }
 
   function annualTax(monthlySalary, deductionsMonthly) {
