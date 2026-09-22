@@ -18,6 +18,16 @@ Three independent lines, all pinned in `test/taxmath.test.js`:
 2. **Bracket continuity** — at every bracket boundary, tax from the lower side equals tax from the upper side to the cent (quick-deduction consistency, all 7 brackets).
 3. **Withholding ≡ annual reconciliation** — the 12 monthly withholdings must sum exactly to the annual statutory tax; the test enforces it. (A real bug was caught here during development: the naive monthly-bracket reading of STA 2018-61 over-withholds; the correct method matches cumulative income against brackets scaled ×12.)
 
+Run them yourself with Node ≥ 18 — no dependencies, no install:
+
+```
+node --test test/taxmath.test.js
+```
+
+## Browser support
+
+One HTML file, no build step and no bundler. Any current Chrome, Edge, Firefox or Safari will run it, on desktop or mobile; JavaScript is the only requirement. The page makes zero network requests after load and writes nothing to storage, so it also works from a local copy of `index.html` with no server.
+
 ## Data sources
 
 | What | Source | Scope |
