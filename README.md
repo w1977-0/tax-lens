@@ -6,6 +6,9 @@
 >
 > **日本語** — 中国の給与・社会保険計算。毎月の源泉徴収(累積控除法)と年度汇算、すべての数字に法的根拠を明示。ブラウザ内だけで動作。**[使ってみる](https://w1977-0.github.io/tax-lens/)**
 
+
+[![CI](https://github.com/w1977-0/tax-lens/actions/workflows/ci.yml/badge.svg)](https://github.com/w1977-0/tax-lens/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![No upload](https://img.shields.io/badge/privacy-no%20upload-green.svg)
+
 ## Why "lens"
 
 Every tax calculator gives you a number. This one shows you **where each number comes from**: the 7-bracket table is the IIT Law's own; the basic deduction is Article 6; the month-by-month curve is the statutory cumulative-withholding method; social-insurance rates and base caps come labeled with the instruments that set them (and flagged where cities vary — you can edit every parameter on the page).
